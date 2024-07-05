@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Portfolio</title>
+    <style>
+      :root {
+        --primary-color: white;
+      }
+      ::selection {
+        background-color: orangered;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: cursive;
+      }
+      header {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 30px;
+        z-index: 10;
+      }
+      header h2 {
+        color: var(--primary-color);
+        flex-grow: 1;
+      }
+      header h2 span {
+        color: red;
+      }
+      header nav {
+        flex-grow: 2;
+      }
+      header nav ul {
+        display: flex;
+        justify-content: space-around;
+      }
+      header nav ul li a {
+        text-decoration: none;
+        padding: 20px;
+        color: white;
+        font-size: 20px;
+        transition: 0.5s;
+        border-radius: 20px;
+        position: relative;
+      }
+
+      header nav ul li a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: red;
+        transition: width 0.5s ease-in-out;
+      }
+
+      header nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      #home {
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+        padding: 40px 50px;
+        background-color: #090101;
+        padding: 100px;
+      }
+      #home div {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      #home div h1 {
+        margin: 50px 0px;
+        font-size: 40px;
+        font-weight: 900;
+        color: white;
+      }
+      #home div p {
+        font-size: 25px;
+        font-weight: 900;
+        text-wrap: wrap;
+        letter-spacing: 4px;
+        line-height: 70px;
+        color: white;
+      }
+      #home div h1 span {
+        color: darkgrey;
+      }
+      #home .icons {
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+      }
+      #home .icons a {
+        margin: 0px 10px;
+        border-radius: 50%;
+        background-color: #fff;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        transition: 0.5s ease-in-out;
+        color: black;
+        border: none;
+      }
+      #home .icons a i {
+        font-size: 30px;
+      }
+      #home .icons a:hover {
+        background-color: var(--color);
+        color: #050801;
+        box-shadow: 0 0 5px var(--color), 0 0 25px var(--color),
+          0 0 50px var(--color), 0 0 200px var(--color);
+        -webkit-box-reflect: below 5px
+          linear-gradient(transparent, rgba(255, 255, 255, 0.2));
+      }
+      #home aside {
+        overflow: hidden;
+        width: 50%;
+        height: 600px;
+        margin: 50px 30px;
+        border-radius: 50px;
+        border: 1px rgb(89, 89, 89) solid;
+      }
+      #home aside .slider_body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        transition: transform 0.5s ease;
+      }
+      #home aside .slider_body img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      #about {
+        clip-path: polygon(0 0, 100% 18%, 100% 100%, 0% 100%);
+        position: relative;
+        background-color: #f8f9fa;
+        overflow: hidden;
+        padding: 100px;
+      }
+
+      #about .about-content {
+        height: auto;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+      }
+
+      #about .about-content > h2 {
+        font-size: 100px;
+        color: #848484;
+        text-align: center;
+      }
+
+      #about .about-content > div {
+        position: relative;
+        z-index: 1;
+      }
+
+      #about .about-content > div p {
+        font-size: 30px;
+        color: #666;
+      }
+      #about .about-content > div p span,
+      #about .about-content > div h2 span {
+        color: red;
+      }
+      .about-cards {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+      }
+      .card {
+        margin-top: 100px;
+        width: 250px;
+        overflow: hidden;
+        border-radius: 20px;
+        border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10px;
+      }
+      .card img {
+        width: 100%;
+        object-fit: cover;
+        height: 300px;
+        transition: 0.5s ease-in-out;
+      }
+      .about-cards .card img:hover {
+        transform: scale(1.1);
+      }
+      .about-cards .card h3 {
+        font-size: 30px;
+        font-weight: 900;
+        margin-top: 10px;
+      }
+      .about-cards .card p {
+        text-align: center;
+        font-size: 15px !important;
+      }
+      #skills {
+        display: flex;
+        flex-direction: column;
+        padding: 100px;
+      }
+      #skills h2 {
+        text-align: center;
+        font-size: 100px;
+        font-weight: 900;
+        color: #848484;
+      }
+      #skills h2::after {
+        content: "";
+        /* position: absolute; */
+        display: block;
+        width: 30%;
+        position: relative;
+        left: 35%;
+        height: 3px;
+        background-color: black;
+        transition: width 0.5s ease-in-out;
+        border-radius: 20px;
+        margin-bottom: 100px;
+      }
+      #skills .card {
+        position: relative;
+      }
+      .skills-content {
+        display: flex;
+        justify-content: space-around;
+      }
+      /* Hobbies section styles */
+      #hobbies {
+        display: flex;
+        flex-direction: column;
+        padding: 100px 0;
+      }
+
+      #hobbies h2 {
+        text-align: center;
+        font-size: 50px;
+        font-weight: 900;
+      }
+
+      #hobbies h2::after {
+        content: "";
+        display: block;
+        width: 20%;
+        position: relative;
+        left: 40%;
+        height: 3px;
+        background-color: black;
+        transition: width 0.5s ease-in-out;
+        border-radius: 20px;
+        margin-bottom: 100px;
+      }
+
+      #hobbies .hobbies-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0 100px;
+      }
+
+      .hobbies-content .hobby {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hobbies-content .hobby img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+      }
+
+      .hobbies-content .hobby h3 {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      #hobbies .hobbies-content {
+        background: url("images\ \(4\).jpg");
+        background-size: cover;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        height: 220px;
+        padding: 50px;
+        border-radius: 20px;
+      }
+      #birthday {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+      }
+      #birthday h2 {
+        font-size: 50px;
+        color: #848484;
+      }
+      #birthday h2::after {
+        content: "";
+        display: block;
+        width: 100%;
+        position: relative;
+        height: 3px;
+        background-color: black;
+        transition: width 0.5s ease-in-out;
+        border-radius: 20px;
+        margin-bottom: 100px;
+      }
+      #birthday-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #birthday-form textarea {
+        height: 200px;
+        font-size: 20px;
+        color: #050801;
+        display: block;
+      }
+      #birthday-form button {
+        padding: 10px 30px;
+        position: relative;
+        left: 50%;
+        margin-top: 20px;
+        transform: translate(-50%);
+        background-color: #050801;
+        color: white;
+        border-radius: 20px;
+      }
+      footer {
+        display: flex;
+        padding: 100px;
+        background-color: #050801;
+        justify-content: space-around;
+      }
+      footer h2 {
+        color: #fff;
+        font-size: 30px;
+      }
+      footer button {
+        padding: 10px 30px;
+        position: relative;
+        left: 50%;
+        margin-top: 20px;
+        transform: translate(-50%);
+        background-color: white;
+        color: black;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: 900;
+      }
+      .connect-us {
+        display: flex;
+        flex-direction: column;
+      }
+      .countaries {
+        width: 100%;
+        height: 100vh;
+      }
+
+      .cslider_body {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        overflow: hidden;
+      }
+
+      .cslider_body div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
+      }
+
+      .cslider_body h1 {
+        font-size: 40px;
+        color: white;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>portfolio<span>.</span></h2>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about ">about</a></li>
+          <li><a href="#skills">skills</a></li>
+          <li><a href="#hobbies ">hobbies </a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="home">
+      <div>
+        <h1><span>software</span> developer</h1>
+        <p>
+          leverage the power of technology to create innovative, efficient, and
+          user-centric solutions that solve real-world problems and improve the
+          quality of life for people worldwide
+        </p>
+        <div class="icons">
+          <a
+            href="tel:+201553172807"
+            style="--color: rgba(120, 23, 216, 0.852)"
+          >
+            <i class="fa-solid fa-phone"></i>
+          </a>
+          <a
+            style="--color: rgba(29, 23, 216, 0.852)"
+            href="https://www.linkedin.com/in/osama-zaid-a4312821a/"
+          >
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a
+            style="--color: rgba(216, 23, 116, 0.852)"
+            href="https://www.facebook.com/zdrosama/"
+          >
+            <i class="fa-brands fa-facebook"></i
+          ></a>
+          <a
+            style="--color: rgba(128, 0, 128, 0.8)"
+            href="https://www.facebook.com/zdrosama/"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </div>
+      <aside class="slider">
+        <div class="slider_body">
+          <img
+            src="67c07bee69ef83de81159cc1b7bc2556.webp"
+            alt="this is image"
+          />
+          <img
+            src="69d80100-f1c0-11ea-9051-d10fe990d176.png"
+            alt="this is image"
+          />
+          <img src="8dc08be96236547a3949ec86be198c36.png" alt="this is image" />
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="about-content">
+        <h2>about</h2>
+        <div>
+          <h2>i<span>'</span>m osama zaid,</h2>
+          <p>i<span>'</span>m software developer</p>
+          <div class="about-cards">
+            <div class="card">
+              <img src="3c02c07c231fd281808c734e26a6aacb.jpg" alt="" />
+              <h3>flutter</h3>
+              <p>cross platform mobile development</p>
+            </div>
+            <div class="card">
+              <img
+                src="desktop-wallpaper-reactjs-atom-minimal-abstract.jpg"
+                alt=""
+              />
+              <h3>react</h3>
+              <p>library for web and native user interfaces</p>
+            </div>
+            <div class="card">
+              <img src="images.jpg" alt="" />
+              <h3>spring</h3>
+              <p>
+                open source Java-based framework used to create a micro Service
+              </p>
+            </div>
+            <div class="card">
+              <img src="images (1).jpg" alt="" />
+              <h3>nodejs</h3>
+              <p>
+                cross-platform JavaScript runtime environment and library for
+                running web applications outside the client's browser.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>skills</h2>
+      <div class="skills-content">
+        <div class="card">
+          <img
+            src="pngtree-optimization-concepts-style-illustrations-vector-png-image_14355048.png"
+            alt=""
+          />
+          <h3>problem solving</h3>
+        </div>
+        <div class="card">
+          <img src="images (2).jpg" alt="" />
+          <h3>version control</h3>
+        </div>
+        <div class="card">
+          <img src="images.png" alt="" />
+          <h3>version control</h3>
+        </div>
+      </div>
+    </section>
+
+    <section id="hobbies">
+      <h2>hobbies</h2>
+      <div class="hobbies-content">
+        <div class="hobby">
+          <img src="images (1).png" alt="writing" />
+          <h3>writing</h3>
+        </div>
+        <div class="hobby">
+          <img src="images (5).jpg" alt="writing" />
+          <h3>drawing</h3>
+        </div>
+      </div>
+    </section>
+
+    <section id="birthday">
+      <h2>Happy Birthday!</h2>
+      <div id="birthday-content">
+        <img id="birthday-image" src="images (6).jpg" alt="Birthday Image" />
+        <form id="birthday-form" style="display: none">
+          <textarea
+            id="message"
+            placeholder="Write a kind message..."
+            rows="4"
+            cols="50"
+          ></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+    <section class="countaries">
+      <div class="cslider_body">
+        <div style="background-image: url('images (8).jpg')">
+          <h1>new york</h1>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <h2>Website Footer &copy; 2024</h2>
+      <div class="connect-us">
+        <h3>connect us</h3>
+        <textarea
+          id="message"
+          placeholder="Write a you message..."
+          rows="4"
+          cols="50"
+        ></textarea>
+        <button>Submit</button>
+      </div>
+    </footer>
+    <script>
+      const slider = document.querySelector(".slider_body");
+      let index = 0;
+      const images = slider.querySelectorAll("img");
+      const totalImages = images.length;
+
+      function showNextImage() {
+        index = (index + 1) % totalImages;
+        slider.style.transform = `translateX(${index * -100}%)`;
+      }
+
+      setInterval(showNextImage, 5000);
+
+      const birthdayContent = document.getElementById("birthday-content");
+      const birthdayImage = document.getElementById("birthday-image");
+      const birthdayForm = document.getElementById("birthday-form");
+
+      // Switch from image to form after 5 seconds
+      setTimeout(function () {
+        birthdayImage.style.display = "none";
+        birthdayForm.style.display = "block";
+      }, 5000);
+
+      // Handle form submission
+      birthdayForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get the message from the textarea
+        const message = document.getElementById("message").value;
+
+        // Simulate a delay before showing the thank-you message
+        setTimeout(function () {
+          // Show dialog message thanking the user
+          showDialogMessage("Thank you for your kind message!");
+
+          // Optionally reset the form or clear the message textarea
+          // birthdayForm.reset();
+          // document.getElementById("message").value = "";
+        }, 1000); // Delay for 1 second before showing dialog
+      });
+
+      // Function to show a dialog message
+      function showDialogMessage(message) {
+        alert(message); // Show a simple alert dialog
+        // You can customize this to use a modal or custom dialog library
+      }
+    </script>
+  </body>
+</html>
